@@ -1,6 +1,4 @@
 # METCS526 HW3
-To execute my codes results, please type use the following command lines:
-
 
 Problem 1: Write a program to determine if a given string is a palindrome
 Answer: 
