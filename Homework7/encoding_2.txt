@@ -1,0 +1,7 @@
+Implement the Huffman Encoding Algorithm we went over in class:
+Design an algorithm that takes as input a text document or long string. Create the Huffman frequency map, the Huffman tree, transform the input based on the Huffman tree and write out the input text to a file.
+You must print out your input set, your frequency map, your tree to the terminal window and write out your compressed file. You must provide screen shots of your code working.
+Design an algorithm that takes as input the output of the previous part and reconstructs the document.
+You must print out your input set, and write out your reconstructed document to a file. You must provide screen shots of your code working.
+
+You should submit a readme.txt file with an explanation of your code and algorithms. You must provide exact instructions on how to run your code and you must submit screen shots of your running code.
