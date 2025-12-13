@@ -2,9 +2,9 @@ Question 1:
     Input: 
         python question1_edit.py < flood_1 ~ 12.txt
     Output: 
-        Screenshot Question_1 flood_Input 1-5
-        Screenshot Question_1 flood_Input 6-10
-        Screenshot Question_1 flood_Input 11-12
+        Screenshot Question_1 flood_Input 1-5.png
+        Screenshot Question_1 flood_Input 6-10.png
+        Screenshot Question_1 flood_Input 11-12.png
     Explanations:
         The core of the algorithm is to find and delete (pop) the largest crack while at the same time record
         the largest remaining water level at each time unit. The algorithm stops either when the remaining water
@@ -46,6 +46,44 @@ Question 2:
     Input:
         python question2_edit.py < ski_input1~3.txt
     Output: 
-        Screenshot Question_2 ski_input 1-3
+        Screenshot Question_2 ski_input 1-3.png
     Explanations:
-        The core of the algorithm is to use a count matrix which 
+        The core of the algorithm is to use a count matrix (which is of the same size as the m x n altitude
+        values matrix) to memorize and update all the possible skiing paths from high altitudes to low altitudes.
+        The algorithm sorts and considers altitudes from the altitude matrix from high to low. The count matrix will 
+        start by containing '0's for all positions (meaning that no path has been created yet).
+        Starting from the highest altitude (referred as the 'current position') in the altitude matrix (say 15), 
+        consider all its 8 neighbors (down, up, left, right, and 4 diagonals). For neighbors with smaller 
+        altitude values, update the count matrix values (referred as 'count values') of those neighbors' 
+        positions by 1. This means that from the highest altitude (where 0 path
+        can lead to that position), every neighboring altitude has 1 path leading 
+        to it (therefore, their count values are all 1 now). We then proceed to the next highest altitude (say 13), 
+        and check its neighbors again to record the positions of neighbors who have lower altitudes than the current 
+        position, and update the neighbors' count values in the count matrix. Suppose the position of altitude 13 already 
+        has a count value of 1 (it is 15's neighbor), now for 13's neighbors, they will have the count value of 1 + 1 = 2
+        (inheriting 13's count value of 1 and add 1 to represent the new path.) We then proceed to the next 
+        altitude values, until all positions in the altitude matrix have been explored. To be more specific, 
+        if we encounter duplicate neighbors (that is, if there are two positions with the same altitude 12, 
+        and they both have the neighbor altitude 11), we compare:
+        (1)'count value for the current position + 1', 
+        and
+        (2)'the existing count values of the neighbors' positions' 
+        and keep the larger value in the count matrix (if tie, keep either one). 
+        If the 11 position already has a count value of 3, 
+        and if its another neighbor wants to produce a count of 2 for it, we keep the value 3 
+        (keeping the maximum number of paths possible). In this way, when we go through all the 
+        altitude positions in the matrix and find the largest value in the count matrix, 
+        we get the longest path possible. 
+
+        To implement this algorithm, I created a sorted dictionary (again, like a priority queue), with 
+        altitude values in descending order as keys, and matrix position(s) of the corresponding 
+        altitude values as dictionary values (if there are multiple positions, append those to a list).
+        I then go through all altitude values in descending order, and for the altitude's corresponding 
+        matrix positions, I find their lower neighbors by looking for smaller altitude values in the 8 
+        neighboring positions (I used 'if 0 <= new_x < len(grid) and 0 <= new_y < len(grid[0])' to only keep 
+        within-range neighbors). If a lower neighbor is found, I'll update that neighboring position's count 
+        value in the count matrix (created seperately and all values start with 0), by keeping the larger 
+        value between 'current position's count value + 1' and 'existing count value for that neighboring 
+        position' using a max() function. In this way, after going through all positions in the altitude 
+        matrix, we can find the longest path length by looking for the max value in the whole count matrix. 
+
